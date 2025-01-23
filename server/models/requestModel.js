@@ -1,14 +1,16 @@
 import mongoose from "mongoose";
 
-const requestSchema = new mongoose.Schema(
+const { Schema, model } = mongoose;
+
+const requestSchema = new Schema(
   {
     sender: {
-      type: mongoose.Schema.Types.ObjectId,
+      type: Schema.Types.ObjectId,
       required: true,
       ref: "User",
     },
     receiver: {
-      type: mongoose.Schema.Types.ObjectId,
+      type: Schema.Types.ObjectId,
       required: true,
       ref: "User",
     },
@@ -23,5 +25,5 @@ const requestSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const Request = mongoose.model("Request", requestSchema);
+const Request = model("Request", requestSchema);
 export default Request;

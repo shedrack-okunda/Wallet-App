@@ -1,25 +1,22 @@
 import mongoose from "mongoose";
 
-const userSchema = new mongoose.Schema(
+const { Schema, model } = mongoose;
+
+const userSchema = new Schema(
   {
-    name: { type: String, required: [true, "Enter your name"] },
-    email: { type: String, required: [true, "Enter your email"], unique: true },
-    phone: { type: String, required: [true, "Enter your phone number"] },
-    password: {
-      type: String,
-      required: [true, "Enter your password"],
-      min: [6, "Password must contain at least 6 numbers"],
-      max: 12,
-    },
+    name: { type: String, required: true },
+    email: { type: String, required: true, unique: true },
+    phone: { type: String, required: true },
+    password: { type: String, required: true, min: 6, max: 12 },
     identificationType: {
       type: String,
-      required: [true, "Enter your identification type"],
+      required: true,
       enum: ["driver license", "passport", "national ID"],
     },
     identificationNumber: {
       type: String,
-      required: [true, "Enter your identification number"],
-      min: [6, "at least 6 numbers"],
+      required: true,
+      min: 6,
       max: 12,
       unique: true,
     },
@@ -36,5 +33,5 @@ const userSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const User = mongoose.model("User", userSchema);
+const User = model("User", userSchema);
 export default User;
